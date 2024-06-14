@@ -11,7 +11,7 @@ RUN echo "alias:github.com/serverwentdown/alias" >> /coredns/plugins.cfg && \
     echo "unbound:github.com/coredns/unbound" >> /coredns/plugins.cfg && \
     echo "nomad:github.com/ituoga/coredns-nomad" >> /coredns/plugins.cfg
 RUN go generate && \
-    go build -o /coredns/coredns
+    CGO_ENABLED=0 go build -o /coredns/coredns
 # RUN setcap cap_net_bind_service=+ep /coredns/coredns
 
 FROM scratch
