@@ -24,4 +24,5 @@ COPY --from=builder /etc/group /etc/group
 USER nobody:nogroup
 
 EXPOSE 53 53/udp
-ENTRYPOINT ["/coredns"]
+# ENTRYPOINT ["/coredns"]
+CMD ["/coredns"]
