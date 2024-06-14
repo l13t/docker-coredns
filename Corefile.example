@@ -1,0 +1,40 @@
+.:53 {
+    unbound
+    log . {
+        class all
+    }
+    cancel 5s
+    cache 30 {
+        success 5000
+        denial 2500
+    }
+    redisc 40 {
+        endpoint 127.0.0.1:6379
+    }
+    whoami
+    nsid "Fuck this shit - I'm out"
+    health :18080
+    ready :8181
+    prometheus :9253
+    reload
+    erratic
+    ipin
+
+    template IN PTR in-addr.arpa {
+    match ^(?P<d>[0-9]*)[.](?P<c>[0-9]*)[.](?P<b>[0-9]*)[.](?P<a>[0-9]*)[.]in-addr[.]arpa[.]$
+    answer "{{ .Name }} 60 IN PTR ip-{{ .Group.a }}-{{ .Group.b }}-{{ .Group.c }}-{{ .Group.d }}.test.lan."
+    }
+}
+
+service.nomad.:1053 {
+    nomad {
+        zone service.nomad
+        address http://127.0.0.1:4646
+    }
+    cache 30
+}
+
+ipin {
+    // if pattern not match, keep processing
+    fallback
+}
