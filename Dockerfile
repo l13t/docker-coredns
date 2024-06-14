@@ -18,8 +18,10 @@ FROM scratch
 
 COPY --from=builder /coredns/coredns /coredns
 COPY --from=builder /etc/ssl/certs /etc/ssl/certs
+COPY --from=builder /etc/passwd /etc/passwd
+COPY --from=builder /etc/group /etc/group
 
-USER nonroot:nonroot
+USER nobody:nogroup
 
 EXPOSE 53 53/udp
 ENTRYPOINT ["/coredns"]
