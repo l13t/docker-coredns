@@ -55,6 +55,6 @@ jobs:
           file: Dockerfile
           context: ./
           push: ${{ github.event_name != 'pull_request' }}
-          tags: coredns:${{ env.RELEASE_DATE }},coredns:latest
+          tags: ghcr.io/l13t/coredns:${{ env.RELEASE_DATE }},ghcr.io/l13t/coredns:latest
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
